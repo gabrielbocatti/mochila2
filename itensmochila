@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mochila Inteligente</title>
+
+
+    <style>
+        body {
+            background-color: aliceblue;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            max-width: 600px;
+            margin: 100px auto;
+            padding: 0px;
+
+        }
+
+
+        h1 {
+            text-align: center;
+
+        }
+        form {
+            margin-bottom: 5px;
+
+        }
+        label {
+            display: inline-block;
+            width: 100px;
+            font-weight: bold;
+            }
+
+            .itens-mochila{ 
+
+            }
+
+        input[type="text"] {
+            width: 200px;
+            border-radius: 70px;
+            padding: 5px;
+            margin-bottom: 10px;
+
+        }
+        button {
+            padding: 8px 20px;
+            background-color: #1100ffe7;
+            color: #fff;
+            border: none;
+            border-radius: 70px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+
+        }
+        li {
+            margin-bottom: 5px;
+}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Mochila Inteligente</h1>
+        <form id="mochila-form">
+             <label for="item">Item: </label> 
+            <input type="text" id="item" name="item">
+            <button type="button" onclick="adicionarItem()">Adicionar</button>
+            <button type="button" onclick="removerItem()">Remover</button>
+        </form>
+        <div id="mensagem"></div>
+        <h2>Itens na mochila:</h2>
+        <ul id="itens-mochila"></ul>
+    </div>
+
+    <script>
+        var itensMochila = [];
+        function adicionarItem() {
+            var itemInput = document.getElementById("item");
+            var item = itemInput.value.trim();
+            if (item !== "") {
+                itensMochila.push(item);
+                itemInput.value = "";
+                atualizarMochila();
+                exibirMensagem(item + " adicionado à mochila.");
+            }
+        }
+
+        function removerItem() {
+            var itemInput = document.getElementById("item");
+            var item = itemInput.value.trim();
+            var index = itensMochila.indexOf(item);
+            if (index !== -1) {
+                itensMochila.splice(index, 1);
+                itemInput.value = "";
+                atualizarMochila();
+                exibirMensagem(item + " removido da mochila.");
+            } else {
+                exibirMensagem(item + " não encontrado na mochila.");
+            }
+        }
+
+        function atualizarMochila() {
+            var itensMochilaElement = document.getElementById("itens-mochila");
+            itensMochilaElement.innerHTML = "";
+            itensMochila.forEach(function(item) {
+                var li = document.createElement("li");
+                li.textContent = item;
+                itensMochilaElement.appendChild(li);
+            });
+        }
+function exibirMensagem(mensagem) {
+            var mensagemElement = document.getElementById("mensagem");
+            mensagemElement.textContent = mensagem;
+        }
+    </script>
+</body>
+</html>
